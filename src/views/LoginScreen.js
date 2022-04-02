@@ -1,12 +1,12 @@
-import users from '../store/users';
 import { useState, useRef, useEffect , useCallback } from 'react';
+import useCurrentUser from '../store/useCurrentUser';
 
-const Login = ({setIsLogged}) => {
-  const inputRef = useRef();   // { current: #ref } < Csak a refet dobja ki
+const Login = ({ setIsLogged }) => {
+  const inputRef = useRef(); // { current: #ref } < Csak a refet dobja ki
   const [inputValue, setInputValue] = useState({ username: '', password: '' });
-  const [currentUser, setCurrentUser] = useState();
+
   const [isTried, setIsTried] = useState(false);
- 
+  const [currentUser, authUser] = useCurrentUser();
 
   // Focus username on initial render
   useEffect(() => {
@@ -16,22 +16,17 @@ const Login = ({setIsLogged}) => {
   const submitHandler = useCallback((event) => {
     event.preventDefault();
     setIsTried(true)
-    const find = users.find((user) => {
 
-      return  inputValue.username.toLowerCase() === user.username.toLowerCase() &&
-              inputValue.password === user.password
-    })
-    setCurrentUser(
-      find
-    )
-    if(find){
-      setIsLogged(true)
+    const authSuccess = authUser(inputValue.username.toLowerCase(), inputValue.password);
+
+    if (authSuccess) {
+      setIsLogged(true);
     }
-    
-  }, [inputValue]);
+
+  }, [inputValue, authUser, setIsLogged]);
 
   useEffect(()=>{
-    
+
   }, [currentUser])
 
   const onChangeHandler = (event) => {
@@ -53,7 +48,7 @@ const Login = ({setIsLogged}) => {
   return (
     <div>
       {(!currentUser && isTried ) && <p>Nem jó a jelszó.</p>}
-      {currentUser && <p>Szia {currentUser.username}!</p>} 
+      {currentUser && <p>Szia {currentUser.username}!</p>}
       <form onSubmit={submitHandler}>
         <label htmlFor="username">
           Username:
@@ -61,7 +56,7 @@ const Login = ({setIsLogged}) => {
         </label>
         <label htmlFor="password">
           Password:
-          <input type="text" id="password" onChange={onChangeHandler} />
+          <input type="password" id="password" onChange={onChangeHandler} />
         </label>
         <button type="submit">Log In</button>
       </form>

@@ -1,10 +1,9 @@
 import './App.css';
 import Login from './views/LoginScreen';
-import {useState} from 'react'
+import { useState } from 'react'
 
 function App() {
-
-  const [isLogged, setIsLogged] = useState(false)
+  const [isLogged, setIsLogged] = useState(false);
 
   return (
     <div className="App">
