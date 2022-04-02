@@ -1,15 +1,24 @@
 import { getAPI } from '../utils/fetch_methods';
 import { useState, useEffect } from 'react';
 import PeopleList from '../components/PeopleList';
+import SearchBar from '../components/forms/SearchBar';
 
 const PeopleListScreen = () => {
   const [peopleList, setPeopleList] = useState([]);
-
+  const [filteredList, setFilteredList] = useState([]);
   useEffect(() => {
-    getAPI('https://swapi.dev/api', 'people', (value) => setPeopleList(value.results));
+    getAPI('https://swapi.dev/api', 'people', (value) => {
+      setPeopleList(value.results);
+      setFilteredList(value.results);
+    });
   }, []);
-
-  return <>{<PeopleList results={peopleList} />}</>;
+  console.log('valamiu', filteredList);
+  return (
+    <>
+      <SearchBar setFilteredList={setFilteredList} peopleList={peopleList} />
+      <PeopleList results={filteredList} />
+    </>
+  );
 };
 
 export default PeopleListScreen;
