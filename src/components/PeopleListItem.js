@@ -1,7 +1,7 @@
-const PeopleListItem = ({ peopleListItem, onClick, index }) => {
+const PeopleListItem = ({ peopleListItem, onClick, dataIndex }) => {
   return (
     <>
-      <a href="#" onClick={onClick} data-index={index}>
+      <a href="#" onClick={onClick} data-index={dataIndex}>
         {peopleListItem.name}
       </a>
     </>

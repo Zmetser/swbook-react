@@ -7,13 +7,13 @@ const PeopleList = ({ results }) => {
   const [person, setPerson] = useState({});
 
   const onCLickhandler = (event) => {
-    setPerson(results[Number(event.target.dataset.index)]);
+    setPerson(results[Number(event.target.getAttribute('data-index'))]);
+    setIsClicked(true);
   };
-  console.log(person);
-
+  console.log(person, isClicked);
   return (
     <div>
-      <Modal />
+      {isClicked && <Modal person={person} />}
       <ul>
         {results.map((peopleItem, index) => {
           return (
@@ -21,7 +21,7 @@ const PeopleList = ({ results }) => {
               <PeopleListItem
                 peopleListItem={peopleItem}
                 onClick={onCLickhandler}
-                data-index={index}
+                dataIndex={index}
               />
             </p>
           );
