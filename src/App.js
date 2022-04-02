@@ -1,6 +1,7 @@
 import './App.css';
 import Login from './views/LoginScreen';
 import useCurrentUser from './store/useCurrentUser';
+import Screen from './views/PeopleListScreen';
 
 function App() {
   const [currentUser, authUser] = useCurrentUser();
@@ -8,7 +9,7 @@ function App() {
 
   return (
     <div className="App">
-      {isLogged ? <p>Hello {currentUser.username}</p> : (
+      {isLogged ? <Screen /> : (
         <Login
           currentUser={currentUser}
           authUser={authUser}
