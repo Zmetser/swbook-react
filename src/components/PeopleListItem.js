@@ -1,6 +1,6 @@
-const PeopleListItem = ({ item }) => {
+const PeopleListItem = ({ item, onClickHandler }) => {
     return (
-        <div>{item.name}</div>
+        <div onClick={onClickHandler}>{item.name}</div>
     )
 }
 
