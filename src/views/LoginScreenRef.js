@@ -1,13 +1,15 @@
 import users from '../store/users';
-import { useState, useRef, useEffect } from 'react';
+import { useState, createRef, useRef, useEffect } from 'react';
 
 const Login = () => {
-  const inputRef = useRef();   // { current: #ref } < Csak a refet dobja ki
+  const inputRef = createRef(); // { current: #ref } < Kidobja az egesz objectet
+  const inputRef2 = useRef();   // { current: #ref } < Csak a refet dobja ki
   const [inputValue, setInputValue] = useState({ username: '', password: '' });
+  console.log('render')
 
-  // Focus username on initial render
   useEffect(() => {
-    inputRef.current.focus();
+    console.log('elso render');
+    inputRef2.current.focus();
   }, []);
 
   const submitHandler = (event) => {
@@ -43,7 +45,7 @@ const Login = () => {
       <form onSubmit={submitHandler}>
         <label htmlFor="username">
           Username:
-          <input type="text" id="username" ref={inputRef} onChange={onChangeHandler} />
+          <input type="text" id="username" ref={inputRef2} onChange={onChangeHandler} />
         </label>
         <label htmlFor="password">
           Password:
