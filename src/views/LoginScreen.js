@@ -1,7 +1,7 @@
 import users from '../store/users';
 import { useState, useRef, useEffect , useCallback } from 'react';
 
-const Login = () => {
+const Login = ({setIsLogged}) => {
   const inputRef = useRef();   // { current: #ref } < Csak a refet dobja ki
   const [inputValue, setInputValue] = useState({ username: '', password: '' });
   const [currentUser, setCurrentUser] = useState();
@@ -16,13 +16,18 @@ const Login = () => {
   const submitHandler = useCallback((event) => {
     event.preventDefault();
     setIsTried(true)
-    setCurrentUser(
-      users.find((user) => {
+    const find = users.find((user) => {
 
-        return  inputValue.username.toLowerCase() === user.username.toLowerCase() &&
-                inputValue.password === user.password
-      })
+      return  inputValue.username.toLowerCase() === user.username.toLowerCase() &&
+              inputValue.password === user.password
+    })
+    setCurrentUser(
+      find
     )
+    if(find){
+      setIsLogged(true)
+    }
+    
   }, [inputValue]);
 
   useEffect(()=>{
