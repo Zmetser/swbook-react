@@ -38,11 +38,12 @@ const Login = ({ authUser, currentUser }) => {
     <div>
       {(!currentUser && isTried ) && <p>Nem jó a jelszó.</p>}
       {currentUser && <p>Szia {currentUser.username}!</p>}
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className="form-container">
         <label htmlFor="username">
           Username:
           <input type="text" id="username" ref={inputRef} onChange={onChangeHandler} />
         </label>
+        <br/>
         <label htmlFor="password">
           Password:
           <input type="password" id="password" onChange={onChangeHandler} />
