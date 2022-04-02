@@ -1,11 +1,33 @@
 .App {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .listtable{
   border-collapse: collapse;
+  width: 250px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .listtable td{
   border: 1px solid black;
+  padding: 5px;
+}
+
+.listtable a{
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.inp{
+  margin-top: 20px;
+  width: 250px;
+  border: 2px solid black;
+  box-sizing: border-box;
+}
+
+.active{
+  background-color: salmon;
 }
