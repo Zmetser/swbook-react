@@ -1,26 +1,33 @@
 import users from '../store/users';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect , useCallback } from 'react';
 
 const Login = () => {
   const inputRef = useRef();   // { current: #ref } < Csak a refet dobja ki
   const [inputValue, setInputValue] = useState({ username: '', password: '' });
+  const [currentUser, setCurrentUser] = useState();
+  const [isTried, setIsTried] = useState(false);
+ 
 
   // Focus username on initial render
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
-  const submitHandler = (event) => {
+  const submitHandler = useCallback((event) => {
     event.preventDefault();
-    users.forEach((user) => {
-      if (
-        inputValue.username.toLowerCase() === user.username.toLowerCase() &&
-        inputValue.password === user.password
-      ) {
-        console.log('U IN');
-      }
-    });
-  };
+    setIsTried(true)
+    setCurrentUser(
+      users.find((user) => {
+
+        return  inputValue.username.toLowerCase() === user.username.toLowerCase() &&
+                inputValue.password === user.password
+      })
+    )
+  }, [inputValue]);
+
+  useEffect(()=>{
+    
+  }, [currentUser])
 
   const onChangeHandler = (event) => {
     setInputValue((prev) => ({ ...prev, [event.target.id]: event.target.value }));
@@ -40,6 +47,8 @@ const Login = () => {
 
   return (
     <div>
+      {(!currentUser && isTried ) && <p>Nem jó a jelszó.</p>}
+      {currentUser && <p>Szia {currentUser.username}!</p>} 
       <form onSubmit={submitHandler}>
         <label htmlFor="username">
           Username:
