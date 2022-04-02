@@ -1,12 +1,10 @@
 import { useState, useRef, useEffect , useCallback } from 'react';
-import useCurrentUser from '../store/useCurrentUser';
 
-const Login = ({ setIsLogged }) => {
+const Login = ({ authUser, currentUser }) => {
   const inputRef = useRef(); // { current: #ref } < Csak a refet dobja ki
   const [inputValue, setInputValue] = useState({ username: '', password: '' });
 
   const [isTried, setIsTried] = useState(false);
-  const [currentUser, authUser] = useCurrentUser();
 
   // Focus username on initial render
   useEffect(() => {
@@ -17,17 +15,8 @@ const Login = ({ setIsLogged }) => {
     event.preventDefault();
     setIsTried(true)
 
-    const authSuccess = authUser(inputValue.username.toLowerCase(), inputValue.password);
-
-    if (authSuccess) {
-      setIsLogged(true);
-    }
-
-  }, [inputValue, authUser, setIsLogged]);
-
-  useEffect(()=>{
-
-  }, [currentUser])
+    authUser(inputValue.username.toLowerCase(), inputValue.password);
+  }, [inputValue, authUser]);
 
   const onChangeHandler = (event) => {
     setInputValue((prev) => ({ ...prev, [event.target.id]: event.target.value }));

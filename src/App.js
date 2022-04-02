@@ -1,13 +1,19 @@
 import './App.css';
 import Login from './views/LoginScreen';
-import { useState } from 'react'
+import useCurrentUser from './store/useCurrentUser';
 
 function App() {
-  const [isLogged, setIsLogged] = useState(false);
+  const [currentUser, authUser] = useCurrentUser();
+  const isLogged = Boolean(currentUser);
 
   return (
     <div className="App">
-      {isLogged ? <p>Hello</p> : <Login setIsLogged={setIsLogged}/>}
+      {isLogged ? <p>Hello {currentUser.username}</p> : (
+        <Login
+          currentUser={currentUser}
+          authUser={authUser}
+        />
+      )}
     </div>
   );
 }
