@@ -12,7 +12,6 @@ const PeopleListScreen = () => {
       setFilteredList(value.results);
     });
   }, []);
-  console.log('valamiu', filteredList);
   return (
     <>
       <SearchBar setFilteredList={setFilteredList} peopleList={peopleList} />

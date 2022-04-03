@@ -1,26 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PeopleListItem from './PeopleListItem';
-import Modal from '../views/Modal';
+import { Modal, Backdrop } from '../views/Modal';
 
 const PeopleList = ({ results }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [person, setPerson] = useState({});
 
-  const onCLickhandler = (event) => {
+  const onClickhandler = (event) => {
     setPerson(results[Number(event.target.getAttribute('data-index'))]);
     setIsClicked(true);
   };
-  console.log(person, isClicked);
+
+  const closingHandler = () => {
+    setIsClicked(false);
+  };
   return (
     <div>
-      {isClicked && <Modal person={person} />}
+      {isClicked && <Backdrop onClick={closingHandler} />}
+      {isClicked && <Modal person={person} onClick={closingHandler} />}
       <ul>
         {results.map((peopleItem, index) => {
           return (
             <p key={`key_${index}`}>
               <PeopleListItem
                 peopleListItem={peopleItem}
-                onClick={onCLickhandler}
+                onClick={onClickhandler}
                 dataIndex={index}
               />
             </p>

@@ -14,10 +14,27 @@
 }
 
 .modal {
-  background-color: rgb(222, 220, 220);
+  position: fixed;
+  top: 30vh;
+  left: 30%;
+  width: 40%;
+  z-index: 100;
+  overflow: hidden;
+  background-color: lightskyblue;
+  border: 1px solid rgb(6, 59, 92);
 }
 .list-item {
   text-align: left;
   width: 300px;
   list-style-type: none;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.75);
 }
