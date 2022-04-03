@@ -10,12 +10,8 @@ const Modal = ({ person, onClick }) => {
   );
 };
 
-const Backdrop = (props) => {
-  return (
-    <div className="backdrop" onClick={props.closingHandler}>
-      {props.children}
-    </div>
-  );
+const Backdrop = ({ onClick }) => {
+  return <div className="backdrop" onClick={onClick}></div>;
 };
 
 export { Modal, Backdrop };
