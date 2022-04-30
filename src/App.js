@@ -1,7 +1,9 @@
 import './App.css';
-// import Login from './views/LoginScreen';
+import Login from './views/LoginScreen';
 // import useCurrentUser from './store/useCurrentUser';
 import PeopleListScreen from './views/PeopleListScreen';
+import { Routes, Route } from 'react-router-dom';
+import PS from './views/PeopleScreen';
 
 function App() {
   // const [currentUser, authUser] = useCurrentUser();
@@ -9,12 +11,11 @@ function App() {
 
   return (
     <div className="App">
-      {/* {isLogged ? (
-        <p>Hello {currentUser.username}</p>
-      ) : (
-        <Login currentUser={currentUser} authUser={authUser} /> */}
-      <PeopleListScreen />
-      {/* )} */}
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/people" element={<PeopleListScreen />} />
+        <Route path="/people/:id" element={<PS />} />
+      </Routes>
     </div>
   );
 }
