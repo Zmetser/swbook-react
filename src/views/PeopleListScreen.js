@@ -2,6 +2,7 @@ import { getAPI } from '../utils/fetch_methods';
 import { useState, useEffect } from 'react';
 import PeopleList from '../components/PeopleList';
 import SearchBar from '../components/forms/SearchBar';
+import { useParams, Link } from 'react-router-dom'
 
 const PeopleListScreen = () => {
   const [peopleList, setPeopleList] = useState([]);
@@ -16,6 +17,7 @@ const PeopleListScreen = () => {
     <>
       <SearchBar setFilteredList={setFilteredList} peopleList={peopleList} />
       <PeopleList results={filteredList} />
+      <Link to={`/people/${id}`}></Link>
     </>
   );
 };

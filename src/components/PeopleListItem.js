@@ -1,9 +1,12 @@
-const PeopleListItem = ({ peopleListItem, onClick, dataIndex }) => {
+import { useParams, Link } from "react-router-dom";
+
+const PeopleListItem = ({ peopleListItem, dataIndex }) => {
+  
   return (
     <>
-      <a href="#" onClick={onClick} data-index={dataIndex}>
+      <Link to={`/people/${peopleListItem.url.match(/\d{1,}/)}`} data-index={dataIndex} results={peopleListItem}>
         {peopleListItem.name}
-      </a>
+      </Link>
     </>
   );
 };

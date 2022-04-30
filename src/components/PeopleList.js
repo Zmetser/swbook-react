@@ -1,13 +1,43 @@
-import { useState } from 'react';
-import PeopleListItem from './PeopleListItem';
-import { Modal, Backdrop } from '../views/Modal';
+import { useState } from "react";
+import PeopleListItem from "./PeopleListItem";
+import { Modal, Backdrop } from "../views/Modal";
+
+/*------STYLE-------*/
+import styled from "styled-components";
+/*-----------------*/
+
+const ListItem = styled.button`
+  border: 1px solid black;
+  display: block;
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin-bottom: 0.3rem;
+  
+
+
+  a {
+    text-decoration: none;
+    transition: 1.3s;
+    transform: scale(0);
+  }
+
+  &:hover {
+    background-color: blue;
+    transform: scale(1.2);
+    box-shadow: 2px 5px 10px blueviolet;
+    transition: 1.3s;
+    a {
+      color: white;
+    }
+  }
+`;
 
 const PeopleList = ({ results }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [person, setPerson] = useState({});
 
   const onClickhandler = (event) => {
-    setPerson(results[Number(event.target.getAttribute('data-index'))]);
+    setPerson(results[Number(event.target.getAttribute("data-index"))]);
     setIsClicked(true);
   };
 
@@ -21,13 +51,13 @@ const PeopleList = ({ results }) => {
       <ul>
         {results.map((peopleItem, index) => {
           return (
-            <p key={`key_${index}`}>
+            <ListItem key={`key_${index}`}>
               <PeopleListItem
                 peopleListItem={peopleItem}
                 onClick={onClickhandler}
                 dataIndex={index}
               />
-            </p>
+            </ListItem>
           );
         })}
       </ul>
